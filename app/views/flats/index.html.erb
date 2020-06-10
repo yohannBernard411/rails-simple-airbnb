@@ -1,0 +1,31 @@
+<%= stylesheet_link_tag 'flats', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<nav class="navbar navbar-light bg-light fixed-top">
+  <a class="navbar-brand">My little AIRBNB</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <%= link_to "add a flat", new_flat_path, class: "btn btn-primary m-5" %>
+  </form>
+  
+</nav>
+
+<h1>All the flats</h1>
+
+<div class="d-flex justify-content-between flex-wrap align-items-start container">
+  <% @flats.each do |flat| %>
+    <div class="card m-3 shadow" style="width: 18rem;">
+      <img src=<%= flat.img_path %> class="card-img-top myresize" alt=<%= flat.name %>>
+      <div class="card-body">
+        <h5 class="card-title"><%= flat.name %></h5>
+        <p class="card-text"><%= flat.address %></p>
+        <p class="card-text"><i class="fas fa-male"></i>  <%= flat.number_of_guests %></p>
+        <p class="card-text"><i class="fas fa-euro-sign"></i>  <%= flat.price_per_night %></p>
+        <%= link_to "Edit", edit_flat_path(flat), class: "btn btn-success" %>
+        <%= link_to "More info", flat_path(flat), class: "btn btn-primary" %>
+        <%= link_to "Delete", flat_path(flat), method: :delete, data: { confirm: "are you sur?" }, class: "btn btn-danger" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
